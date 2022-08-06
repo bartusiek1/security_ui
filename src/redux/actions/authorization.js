@@ -1,9 +1,21 @@
-import {AUTH_LOGIN_FAIL, AUTH_LOGIN_START, AUTH_LOGIN_SUCCESS} from "./ActionTypes";
+import {AUTH_LOGIN_CHECK, AUTH_LOGIN_FAIL, AUTH_LOGIN_START, AUTH_LOGIN_SUCCESS, AUTH_LOGOUT} from "./ActionTypes";
 import connection from "../../axios/axios";
 
 export const authorizationStart = () => {
     return {
         type: AUTH_LOGIN_START
+    }
+}
+
+export const checkStorageAuthentication = () => {
+    return {
+        type: AUTH_LOGIN_CHECK
+    }
+}
+
+export const authorizationLogout = () => {
+    return {
+        type: AUTH_LOGOUT
     }
 }
 
@@ -34,6 +46,7 @@ export const authenticateUser = (authorizationRequest) => {
 
                 const token = data.headers["authorization"]
                 const roles = data.headers["app_roles"]
+                console.log(roles)
 
                dispatch(authorizationSuccess(token, roles))
             })
